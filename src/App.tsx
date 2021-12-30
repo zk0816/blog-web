@@ -4,13 +4,16 @@ import { HashRouter } from "react-router-dom";
 
 import Header from "@/components/BlogHeader";
 import routes from "@/router";
-// import "antd/dist/antd.css";
+import './App.less';
+import "antd/dist/antd.css";
 
 const App = () => {
   return (
     <HashRouter>
-      <Header />
-      {renderRoutes(routes)}
+      <div className="content">
+        <Header />
+        <div style={{width: 1200, textAlign: 'center', margin: 'auto'}}>{renderRoutes(routes)}</div>
+      </div>
     </HashRouter>
   );
 };

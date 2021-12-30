@@ -1,0 +1,27 @@
+.head {
+  height: 60px;
+  z-index: 10;
+  background-color: #000;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // 吸顶
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  .tent {
+    width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #000;
+    align-items: center;
+    .nav {
+      display: flex;
+      .title:hover {
+        cursor:pointer;
+        border-radius: 15px;
+        background-color: rgb(63, 101, 160);
+      }
+    }
+  }
+}

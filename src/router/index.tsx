@@ -12,6 +12,7 @@ import {Redirect} from 'react-router-dom';
 import React from 'react';
 import Article from '@/pages/Article';
 import Home from '@/pages/Home';
+import Friend from '@/pages/Firend';
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: "/article",
     component: Article,
+  },
+  {
+    path: "/friend",
+    component: Friend,
   },
 ];
 
