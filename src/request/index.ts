@@ -36,7 +36,6 @@ axios.interceptors.request.use((config: http.Config) => {
   const _params = Object.assign({}, config_.params, config.params);
   // eslint-disable-next-line no-param-reassign
   config = Object.assign({}, config_, config);
-
   config.params = _params;
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -85,9 +84,15 @@ axios.interceptors.request.use((config: http.Config) => {
   }
 
   if (config.prefix) {
-    if (!config.url!.includes('http')) {
+    //增加判断 使用高德api
+    if (config.url!.includes('v3')) {
+      config.url = `/${config.url}`.replace('//', '/');
+    } else {
       config.url = `/${config.prefix}${config.url}`.replace('//', '/');
     }
+    // if (!config.url!.includes('http')) {
+    //   config.url = `/${config.prefix}${config.url}`.replace('//', '/');
+    // }
   }
   return config;
 });

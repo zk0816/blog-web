@@ -27,7 +27,13 @@ export default defineConfig({
         target:'http://localhost:9080',
         changeOrigin:true,
         //rewrite: (path) => path.replace(/^\/api/, '')
-      }
+      },
+      //高德接口
+      '/v3':{
+        target:'https://restapi.amap.com',
+        changeOrigin:true,
+        //rewrite: (path) => path.replace(/^\/api/, '')
+      },
     },
   }
 })
