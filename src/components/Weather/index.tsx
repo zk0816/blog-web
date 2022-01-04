@@ -3,11 +3,12 @@
  */
 
 import { message } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {getWeather,getCity,KEY} from './api';
-import './index.less'
+import './index.css'
 
 const Weather = () => {
+  const [data,setData] = useState<any>({})
 
   useEffect(()=>{
     getCity({ key: KEY, address: "四川省成都市" })
@@ -17,52 +18,57 @@ const Weather = () => {
           city: res.data.geocodes[0].adcode,
           extensions: "base",
         })
-          .then((result: any) => console.log(result.data))
+          .then((result: any) => {console.log(result.data), setData(result.data.lives[0]);})
           .catch((e: any) => message.error(e.message));
       })
       .catch((e: any) => message.error(e.message));
   },[])
+
   
   return (
-    <div>
-      <div className="icon sun-shower">
-        <div className="cloud"></div>
-        <div className="sun">
-          <div className="rays"></div>
+    <div className="background">
+      <div className="container">
+        <div id="card" className="weather">
+          <div className="details">
+            <div className="temp">
+              {data.temperature}
+              <span>&deg;</span>
+            </div>
+            <div className="right">
+              <div id="summary">{data.weather}</div>
+              <div
+                style={{ fontWeight: "bold", marginTop: "4px", fontSize: 30 }}
+              >
+                {data.city}
+              </div>
+            </div>
+          </div>
+          <img
+            className="weatherimg"
+            alt="image1"
+            src={`/src/assets/img/${data.weather || "50d"}.${"svg"}`}
+          ></img>
+          <div className="infos">
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 30 }}>
+              <img
+                alt="humidity1"
+                className="humidityimg"
+                style={{ width: "5", height: "5" }}
+                src="/src/assets/img/humidity.svg"
+              ></img>
+              <div className="humidity">空气湿度 {data.humidity}%</div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img
+                alt="windspeed1"
+                className="windimg"
+                style={{ width: "5", height: "5" }}
+                src="/src/assets/img/wind.svg"
+              ></img>
+              <div className="windspeed">风力级别 {data.windpower}级</div>
+            </div>
+          </div>
         </div>
-        <div className="rain"></div>
-      </div>
-
-      <div className="icon thunder-storm">
-        <div className="cloud"></div>
-        <div className="lightning">
-          <div className="bolt"></div>
-          <div className="bolt"></div>
-        </div>
-      </div>
-
-      <div className="icon cloudy">
-        <div className="cloud"></div>
-        <div className="cloud"></div>
-      </div>
-
-      <div className="icon flurries">
-        <div className="cloud"></div>
-        <div className="snow">
-          <div className="flake"></div>
-          <div className="flake"></div>
-        </div>
-      </div>
-
-      <div className="icon sunny">
-        <div className="sun">
-          <div className="rays"></div>
-        </div>
-      </div>
-
-      <div className="icon rainy">
-        <div className="cloud"></div>
-        <div className="rain"></div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import request from '@/request';
-import type { Categorty, Tag, Current } from './enitiy';
+import type { Categorty, Tag, Current } from './interface';
 import type { http } from '@/request/http';
 
 type P<T> = http.PromiseResp<T>;
