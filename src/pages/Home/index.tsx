@@ -5,6 +5,7 @@ import useInitial from '@/hooks/useInitail';
 import * as API from './api';
 import './index.less'
 import Weather from '@/components/Weather';
+import AncientPoems from '@/components/AncientPoems';
 
 const Home: React.FC = () => {
   const [content,setContent] = useState({});
@@ -13,12 +14,16 @@ const Home: React.FC = () => {
   const [list,setList] = useState<any>({category: [], tag: []});
 
   useEffect(() => {
+    /**
+     * 获取古诗词 使用第三方插件 https://www.jinrishici.com/doc/
+     * 详情看文档
+     */
     load(
       (result: any) => {
-        setContent(result.origin);
+        setContent(result.data.origin);
       },
       (errData: any) => {
-        message.error(errData.message)
+        message.error(errData.message);
       }
     );
   }, [])
@@ -72,7 +77,7 @@ const Home: React.FC = () => {
         ))}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        {list.tag.map((e: any,index: number) => (
+        {list.tag.map((e: any, index: number) => (
           <div
             key={e.tagId}
             className={e.selected ? "text oldtext" : "text newtext"}
@@ -90,7 +95,8 @@ const Home: React.FC = () => {
           justifyContent: "space-around",
         }}
       >
-        <div>
+        <div style={{ marginTop: 20 }}>
+          <AncientPoems data={content} />
           <Weather />
         </div>
         <div>小虎之家</div>

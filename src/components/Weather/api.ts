@@ -10,6 +10,16 @@ export interface Params {
   output?: string //返回格式 JSON,XML
 }
 
+export interface AddressParams {
+  key: string //高德申请的key
+  ip?: string
+}
+
+/** 高德获取定位api*/
+export function getAddress(params: AddressParams): any {
+  return request.get(`/v3/ip`, { params});
+}
+
 
 /** 高德天气api*/
 export function getWeather(params: Params): any {

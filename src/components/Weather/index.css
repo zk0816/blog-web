@@ -1,21 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Lato:300";
 @import "https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css";
-/* html,
-body,
-.background {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Lato", sans-serif;
-}
-html {
-  background: #fff;
-}
-body {
-  background: #eee;
-  background: linear-gradient(0deg, rgba(0, 0, 200, 0.2), rgba(0, 0, 200, 0));
-} */
+
 .background {
   background: #eee;
   background: linear-gradient(
@@ -50,7 +35,6 @@ body {
   padding: 25px;
   height: 400px;
   min-height: 300px;
-  margin: 20px;
   border-radius: 5px;
   position: relative;
 }
@@ -89,106 +73,18 @@ body {
   margin-left: 5px;
 }
 .weather {
-  background-color: #dae3fd;
+  background-color: black;
   transition: background-color 2s ease;
 }
 
-/* SEARC */
-.Search {
-  position: relative;
-  font-weight: 300;
-  font-size: 40px;
-  color: #555;
-}
 
-.Search-box {
-  margin: 0 12px;
-  margin-top: 6vh;
-  padding: 8px 48px;
-  height: 35px;
-  border: 0;
-  border-radius: 20px;
-  box-shadow: 0 3px 12px -1px rgba(0, 0, 0, 0.3);
-  transition: all 0.15s ease-in-out;
-}
-.Search-box:focus {
-  flex: 1 0 90%;
-  outline: 0;
-}
-.Search-box:focus + .Search-label {
-  transform: translateX(12px);
-}
-.searchbtn {
-  font-family: "Gilroy ExtraBold", system-ui, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: 1px;
-  font-size: 17px;
-  background: #d8aaae;
-  color: #f8faff;
-  appearance: none;
-  border: none;
-  border-radius: 17px;
-  margin-top: -35px;
-  height: 36px;
-  margin-left: 170px;
-  padding: 0 24px;
-  box-shadow: 0 10px 60px -13px #6b4055;
-  cursor: pointer;
-  user-select: none;
-  outline: none;
-}
-.searchbtn:hover {
-  background: #75425a;
-  box-shadow: 0 8px 65px -5px #72455c;
-}
-.searchbtn:active {
-  background: #d5bec0;
-  box-shadow: 0 10px 60px -10px #8a325e;
-  transform: perspective(250px) scale3d(1, 1, 1) translateY(5%) !important;
-}
-
-#date,
-#hours,
-#minutes,
-#seconds {
-  margin: 0;
-}
-#hours,
-#minutes,
-#seconds {
-  display: inline-block;
-}
-#date {
-  font-size: 24px;
-}
-#hours,
-#minutes {
-  font-size: 22px;
-  font-weight: 400;
-}
-#seconds {
-  font-size: 18px;
-  font-weight: 200;
-}
-.segmentdate {
-  font-family: "Gilroy ExtraBold", system-ui, sans-serif;
-  color: rgb(255, 255, 255);
-  margin-top: -23vh;
-  background: #cf959a;
-  width: 20%;
-  border-top-right-radius: 22px;
-  border-bottom-right-radius: 22px;
-  padding: 0.5vh;
-  box-shadow: 0 10px 60px -13px #6b4055;
-}
 .infos {
   font-family: "Lato", sans-serif;
   font-size: 19px;
   line-height: 29px;
   font-weight: 600;
   color: #888;
-  margin-top: -7vh;
+  margin-top: -50px;
 }
 .weatherimg {
   width: 100%;
@@ -218,65 +114,5 @@ body {
   width: 14%;
   margin-left: 3vh;
 }
-* {
-  box-sizing: border-box;
-}
-.checkbox {
-  display: none;
-}
 
-.checkbox + label {
-  display: inline-block;
-  margin-top: 1vh;
-  margin-left: 198vh;
-  position: relative;
-  text-align: right;
-  width: 90px;
-  height: 40px;
-  background: linear-gradient(
-      to right,
-      #e70703 0,
-      #ece3e5 45%,
-      #0261ce 54%,
-      rgb(206, 99, 99) 100%
-    )
-    0 0;
-  background-size: 650px 100%;
-  border-radius: 70px;
-  padding: 7px;
-  cursor: pointer;
-  transition: all 500ms ease;
-  box-shadow: 0 0px 10px rgba(255, 255, 255, 0.2) inset;
-}
-.checkbox + label:before {
-  content: "TR";
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  left: 5px;
-  top: 4px;
-  border-radius: 100%;
-  background: #fff;
-  text-align: center;
-  z-index: 10;
-  line-height: 34px;
-  font-family: "Cabin", sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  color: #ff0400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: left 500ms ease, color 500ms ease, transform 150ms ease;
-}
-.checkbox + label:active:before {
-  transform: scale(0.95);
-}
 
-.checkbox:checked + label {
-  background-position-x: -350px;
-}
-.checkbox:checked + label:before {
-  content: "EN";
-  color: #007177;
-  left: 54px;
-}
