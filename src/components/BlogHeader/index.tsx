@@ -5,12 +5,8 @@ import { useHistory } from "react-router-dom";
 
 const data = [
   {
-    title: "首页",
-    path: "/home",
-  },
-  {
     title: "文章",
-    path: "/article",
+    path: "/home",
   },
   {
     title: "说说",

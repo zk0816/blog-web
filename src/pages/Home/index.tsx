@@ -4,13 +4,18 @@ import { message } from 'antd';
 import useInitial from '@/hooks/useInitail';
 import * as API from './api';
 import './index.less'
-import Weather from '@/components/Weather';
-import AncientPoems from '@/components/AncientPoems';
+import Weather from '@/components/WeatherCard';
+import AncientPoems from '@/components/AncientPoemsCard';
+import List from './components/List';
+import usePagination from '@/hooks/usePagination';
+import User from '@/components/UserCard';
+
 
 const Home: React.FC = () => {
   const [content,setContent] = useState({});
-  const {data: categorylist,} = useInitial(API.getCategory,[],'')
-  const { data: taglist, } = useInitial(API.getTag, [], "");
+  const {data: categorylist,} = useInitial(API.getCategory,[],'') //查分类
+  const { data: taglist, } = useInitial(API.getTag, [], ""); //查标签
+  const {list: articlelist, paginationConfig,setParams} = usePagination(API.getArticle,{pageSize: 10, current: 1}); //查文章
   const [list,setList] = useState<any>({category: [], tag: []});
 
   useEffect(() => {
@@ -68,7 +73,7 @@ const Home: React.FC = () => {
       <div style={{ display: "flex", justifyContent: "center" }}>
         {list.category.map((e: any, index: number) => (
           <div
-            key={e.categoryId}
+            key={`category_${index}`}
             className={e.selected ? "text oldtext" : "text newtext"}
             onClick={() => onEdit(index, "category")}
           >
@@ -79,7 +84,7 @@ const Home: React.FC = () => {
       <div style={{ display: "flex", justifyContent: "center" }}>
         {list.tag.map((e: any, index: number) => (
           <div
-            key={e.tagId}
+            key={`tag_${index}`}
             className={e.selected ? "text oldtext" : "text newtext"}
             onClick={() => onEdit(index, "tag")}
           >
@@ -99,8 +104,16 @@ const Home: React.FC = () => {
           <AncientPoems data={content} />
           <Weather />
         </div>
-        <div>小虎之家</div>
-        <div>22222</div>
+        <div>
+          <List
+            list={articlelist}
+            paginationConfig={paginationConfig}
+            setParams={setParams}
+          />
+        </div>
+        <div>
+          <User />
+        </div>
       </div>
     </div>
   );

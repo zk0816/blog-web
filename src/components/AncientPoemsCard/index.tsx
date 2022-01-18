@@ -1,5 +1,5 @@
 /**
- * 古诗词
+ * 古诗词卡片
  */
 
 import React from 'react';
@@ -12,10 +12,10 @@ interface Props {
 }
 
 interface Data {
-  title: string; //标题
-  author: string; //作者
-  content: string[]; //内容
-  dynasty: string; //朝代
+  title?: string; //标题
+  author?: string; //作者
+  content?: string[]; //内容
+  dynasty?: string; //朝代
 }
 
 const AncientPoems = (props: Props) => {

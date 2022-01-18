@@ -12,7 +12,7 @@ const App = () => {
     <HashRouter>
       <div className="content">
         <Header />
-        <div style={{width: 1200, textAlign: 'center', margin: 'auto'}}>{renderRoutes(routes)}</div>
+        <div style={{display: 'flex', justifyContent: 'center'}}>{renderRoutes(routes)}</div>
       </div>
     </HashRouter>
   );

@@ -1,12 +1,10 @@
-import type { http } from '@/request/http';
-import { useState, useEffect, useRef } from 'react';
-import type { common } from '@/request/common';
-import { message } from 'antd';
-import type { TablePaginationConfig } from 'antd/lib/table';
-import type { Draft } from 'immer';
-import produce from 'immer';
+import { http } from "@/request/http";
+import { useState, useEffect, useRef } from "react";
+import { common } from "@/request/common";
+import { message } from "antd";
+import { TablePaginationConfig } from "antd/lib/table";
+import produce, { Draft } from "immer";
 
-// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 interface Params extends common.PaginationParam {
   [key: string]: any;
 }
@@ -33,13 +31,13 @@ export interface State<T> {
 function usePagination<T>(
   api: API<T>,
   params: Params = {},
-  storage: Storage = { pageName: '', delay: false, notList: false },
+  storage: Storage = { pageName: "", delay: false, notList: false }
 ) {
-  const notList: boolean = storage.notList || false;
+  let notList: boolean = storage.notList || false;
   const [state, setState] = useState<State<T>>({
     loading: !storage.pageName,
     innerParams: { ...params },
-    errMsg: '',
+    errMsg: "",
     list: [],
     pagination: { total: 0, current: 1, pageSize: 10, lastPage: true },
   });
@@ -56,14 +54,13 @@ function usePagination<T>(
    *    2.当hasStorage为null是，需要将delay设置为false，并且使用setParams({...params}, true)将所需要的初始化参数设置，
    *      并将loading设置为true，进行接口请求；
    *
-   * 使用示例在 保养套餐卡页面，文件路径为：src\pages\cas\MaintenanceCard\MPList\index.tsx
    */
   const [hasStorage, setHasStorage] = useState<true | null>();
 
   const storageParams = useRef<Params>();
 
   const _init_ = async () => {
-    const data: State<T> = JSON.parse(sessionStorage.getItem(storage.pageName!) || 'null');
+    const data: State<T> = JSON.parse(sessionStorage.getItem(storage.pageName!) || "null");
     // const data = await localforage.getItem<State>(storage.pageName!);
     setStorageInfo(data);
     setHasStorage(data === null ? null : true);
@@ -81,18 +78,17 @@ function usePagination<T>(
       setState(
         produce(state, (df) => {
           df.loading = notList ? true : storageInfo.loading;
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           !notList && (df.list = storageInfo.list as Draft<T>[]);
           df.innerParams = storageInfo.innerParams;
           df.errMsg = storageInfo.errMsg;
           df.pagination = storageInfo.pagination;
-        }),
+        })
       );
     } else if (storageInfo === null) {
       setState(
         produce(state, (df) => {
           df.loading = true;
-        }),
+        })
       );
     }
   }, [storageInfo]);
@@ -103,18 +99,15 @@ function usePagination<T>(
    */
   useEffect(() => {
     if (storage.delay) return;
-    if (state.loading)
-      getListDataset(storageParams.current ? storageParams.current : state.innerParams || {});
+    if (state.loading) getListDataset(storageParams.current ? storageParams.current : state.innerParams || {});
   }, [state.loading, storage.delay]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     storage.pageName && sessionStorage.setItem(storage.pageName, JSON.stringify(state));
   }, [state.list]);
 
   function getListDataset(options: Params) {
     const _pa = setParams({ ...options });
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     !!storageParams.current && (storageParams.current = undefined);
     return api(_pa)
       .then((res) => {
@@ -129,9 +122,9 @@ function usePagination<T>(
                 total: res.data!.total || 0,
                 lastPage: res.data!.lastPage,
               };
-              df.errMsg = '';
+              df.errMsg = "";
               df.loading = false;
-            }),
+            })
           );
         }
       })
@@ -146,7 +139,7 @@ function usePagination<T>(
             };
             df.errMsg = e.message;
             df.loading = false;
-          }),
+          })
         );
         message.error(`查询失败:${e.message}`);
       });
@@ -165,13 +158,13 @@ function usePagination<T>(
         produce(state, (df) => {
           df.innerParams = _pa;
           df.loading = true;
-        }),
+        })
       );
     } else {
       setState(
         produce(state, (df) => {
           df.innerParams = _pa;
-        }),
+        })
       );
     }
     return _pa;
@@ -195,28 +188,28 @@ function usePagination<T>(
     setState(
       produce(state, (df) => {
         df.loading = loading;
-      }),
+      })
     );
   }
   function setList(list: any[]) {
     setState(
       produce(state, (df) => {
         df.list = list;
-      }),
+      })
     );
   }
   function setErrMsg(errMsg: string) {
     setState(
       produce(state, (df) => {
         df.errMsg = errMsg;
-      }),
+      })
     );
   }
   function updateList(item: T, index: number): void {
     setState(
       produce(state, (df) => {
         df.list[index] = item as Draft<T>;
-      }),
+      })
     );
   }
   function push(item: T): void {
@@ -225,7 +218,7 @@ function usePagination<T>(
         produce(state, (df) => {
           df.list.push(item as Draft<T>);
           df.pagination.total! += 1;
-        }),
+        })
       );
     } else setLoading(true);
   }
@@ -235,7 +228,7 @@ function usePagination<T>(
         produce(state, (df) => {
           df.list.unshift(item as Draft<T>);
           df.pagination.total! += 1;
-        }),
+        })
       );
     } else setLoading(true);
   }
@@ -245,7 +238,7 @@ function usePagination<T>(
         produce(state, (df) => {
           df.list.pop();
           df.pagination.total! -= 1;
-        }),
+        })
       );
     } else setLoading(true);
   }
@@ -255,7 +248,7 @@ function usePagination<T>(
         produce(state, (df) => {
           df.list.shift();
           df.pagination.total! -= 1;
-        }),
+        })
       );
     } else setLoading(true);
   }
@@ -265,20 +258,19 @@ function usePagination<T>(
         produce(state, (df) => {
           df.list.splice(startIndex, count);
           df.pagination.total! -= count;
-        }),
+        })
       );
     } else setLoading(true);
   }
 
   /**参数重置 */
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   function resetParam(params?: Params) {
     const _pa = params ? { ...params, current: 1 } : { current: 1 };
     setState(
       produce(state, (df) => {
         df.innerParams = _pa;
         df.loading = true;
-      }),
+      })
     );
   }
 

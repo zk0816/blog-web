@@ -17,7 +17,7 @@ export interface Params {
 
 
 /** 查询文章*/
-export function getArticle(params: any): Page<Current[]> {
+export function getArticle(params: any): Page<Current> {
   return request.get(`/article/list`, { params });
 }
 
