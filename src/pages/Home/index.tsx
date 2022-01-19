@@ -1,37 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {load} from 'jinrishici';
 import { message } from 'antd';
 import useInitial from '@/hooks/useInitail';
 import * as API from './api';
 import './index.less'
 import Weather from '@/components/WeatherCard';
-import AncientPoems from '@/components/AncientPoemsCard';
 import List from './components/List';
 import usePagination from '@/hooks/usePagination';
 import User from '@/components/UserCard';
 
 
 const Home: React.FC = () => {
-  const [content,setContent] = useState({});
   const {data: categorylist,} = useInitial(API.getCategory,[],'') //查分类
   const { data: taglist, } = useInitial(API.getTag, [], ""); //查标签
   const {list: articlelist, paginationConfig,setParams} = usePagination(API.getArticle,{pageSize: 10, current: 1}); //查文章
   const [list,setList] = useState<any>({category: [], tag: []});
-
-  useEffect(() => {
-    /**
-     * 获取古诗词 使用第三方插件 https://www.jinrishici.com/doc/
-     * 详情看文档
-     */
-    load(
-      (result: any) => {
-        setContent(result.data.origin);
-      },
-      (errData: any) => {
-        message.error(errData.message);
-      }
-    );
-  }, [])
 
   useEffect(()=>{
     categorylist.unshift({categoryName: '推荐', categoryId: -1})
@@ -100,8 +82,7 @@ const Home: React.FC = () => {
           justifyContent: "space-around",
         }}
       >
-        <div style={{ marginTop: 20 }}>
-          <AncientPoems data={content} />
+        <div>
           <Weather />
         </div>
         <div>
