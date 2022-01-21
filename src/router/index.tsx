@@ -25,7 +25,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/article",
+    path: "/article/:artid",
     component: Article,
   },
   {

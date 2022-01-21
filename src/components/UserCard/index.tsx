@@ -1,5 +1,6 @@
 /**
  * 个人信息卡片
+ * 
  */
 
 import React, { useState } from 'react';
@@ -7,10 +8,10 @@ import { Image, Modal, Popover } from "antd";
 import { EnvironmentOutlined, GithubOutlined, QqOutlined, WechatOutlined } from '@ant-design/icons';
 
 interface Props {
-  width?: number
-  height?: number
-  imgwidth?: number
-  imgheight?: number
+  width?: number  //卡片宽
+  height?: number //卡片高
+  imgwidth?: number //图片宽
+  imgheight?: number //图片高
 }
 
 const User = (props: Props) => {

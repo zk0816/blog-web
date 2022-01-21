@@ -49,9 +49,9 @@ const List = (props:Props) => {
           className="content_article"
           onClick={() =>
             history.push({
-              pathname: `/article`,
-              search: `${e.artid}`,
-              state: e.artid,
+              pathname: `/article/${e.artid}`,
+              // search: `${e.artid}`,
+              // state: e.artid,
             })
           }
         >
