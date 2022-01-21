@@ -113,7 +113,7 @@ const Article: React.FC = () => {
       <div className="comment">
         {commentList.map((e: CommentList) => (
           <Comment
-            style={{maxWidth: 800}}
+            style={{maxWidth: 720}}
             key={e.commentId}
             actions={[
               <span key="comment-nested-reply-to">
@@ -148,7 +148,7 @@ const Article: React.FC = () => {
                 style={{
                   background: "rgba(247,248,250,.7)",
                   paddingInline: 20,
-                  maxWidth: 800
+                  maxWidth: 720
                 }}
                 author={
                   <span

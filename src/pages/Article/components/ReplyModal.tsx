@@ -35,7 +35,7 @@ const ReplyModal: React.FC<Props> = (props: Props) => {
           content: undefined,
         });
         setLoading && setLoading(true);
-        setVisible(true);
+        setVisible(false);
       })
       .catch((err) => message.error(err.message));
   }
