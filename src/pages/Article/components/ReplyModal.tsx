@@ -3,6 +3,7 @@ import React from 'react';
 import {Modal, Form, message} from 'antd';
 import CommentCard from '@/components/CommentCard';
 import * as API from '../api';
+import _ from 'lodash';
 
 interface Props {
   setLoading?: (value: boolean) => void;
@@ -49,12 +50,13 @@ const ReplyModal: React.FC<Props> = (props: Props) => {
       cancelText="取消"
       okText="发送"
     >
-      <Form form={form} onFinish={handleOk}>
+      <Form form={form} onFinish={_.debounce(handleOk,1000)}>
         <Form.Item>
           <CommentCard
             title={
               <span>
-                回复给<span style={{color: '#6193bb'}}>{row.commentName}</span>:
+                回复给
+                <span style={{ color: "#6193bb" }}>{row.commentName}</span>:
               </span>
             }
             form={form}

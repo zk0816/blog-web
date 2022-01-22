@@ -29,6 +29,7 @@ import { useParams } from "react-router-dom";
 import { CommentList, CommentType, Reply } from './api';
 import { MessageOutlined, UserOutlined } from "@ant-design/icons";
 import ReplyModal from '@/pages/Article/components/ReplyModal';
+import _ from 'lodash'
 
 
 const plugins = [
@@ -89,7 +90,7 @@ const Article: React.FC = () => {
       </div>
       <Form
         form={form}
-        onFinish={onSave}
+        onFinish={_.debounce(onSave, 1000)}
         style={{ backgroundColor: "#FFF", marginTop: 30 }}
       >
         <Form.Item>
@@ -113,7 +114,7 @@ const Article: React.FC = () => {
       <div className="comment">
         {commentList.map((e: CommentList) => (
           <Comment
-            style={{maxWidth: 720}}
+            style={{ maxWidth: 720 }}
             key={e.commentId}
             actions={[
               <span key="comment-nested-reply-to">
@@ -148,7 +149,7 @@ const Article: React.FC = () => {
                 style={{
                   background: "rgba(247,248,250,.7)",
                   paddingInline: 20,
-                  maxWidth: 720
+                  maxWidth: 720,
                 }}
                 author={
                   <span
