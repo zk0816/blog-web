@@ -91,13 +91,13 @@ const List = (props:Props) => {
                 <span>
                   <LikeOutlined />
                 </span>
-                <span className="number">{e.like}</span>
+                <span className="number">{e.like === 0 ? "点赞" : e.like}</span>
               </div>
               <div className="icon">
                 <span>
                   <MessageOutlined />
                 </span>
-                <span className="number">{e.comment}</span>
+                <span className="number">{e.comment === 0 ? '评论' : e.comment}</span>
               </div>
             </div>
           </div>

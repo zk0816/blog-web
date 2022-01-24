@@ -2,6 +2,7 @@ import React from 'react';
 import './index.less'
 import { HomeOutlined, SettingOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const data = [
   {
@@ -10,7 +11,7 @@ const data = [
   },
   {
     title: "说说",
-    path: "/home",
+    path: "/say",
   },
   {
     title: "留言",
@@ -37,7 +38,7 @@ const Header = () => {
         />
         <div className="nav">
           {data.map((value: any, index: number) => (
-            <span
+            <NavLink
               key={`index-${index}`}
               style={{
                 fontSize: 20,
@@ -45,12 +46,14 @@ const Header = () => {
                 textAlign: "center",
                 height: 38,
                 lineHeight: "38px",
+                //color: "#333333",
               }}
-              onClick={() => history.push(value.path)}
-              className="title"
+              to={value.path}
+              className="titlelink"
+              activeStyle={{color:'#007fff'}}
             >
               {value.title}
-            </span>
+            </NavLink>
           ))}
         </div>
         <SettingOutlined

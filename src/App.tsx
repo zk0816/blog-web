@@ -11,8 +11,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="content">
-        <Header />
-        <div style={{display: 'flex', justifyContent: 'center'}}>{renderRoutes(routes)}</div>
+        {React.useMemo(() => (
+          <Header />
+        ), [])}
+        {renderRoutes(routes)}
+        {/* <div style={{display: 'flex', justifyContent: 'center', borderTop: '1px #E5E5E5 solid'}}>{renderRoutes(routes)}</div> */}
       </div>
     </BrowserRouter>
   );

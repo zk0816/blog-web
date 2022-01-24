@@ -13,6 +13,8 @@ import React from 'react';
 import Article from '@/pages/Article';
 import Home from '@/pages/Home';
 import Friend from '@/pages/Firend';
+import Message from '@/pages/Message';
+import Say from '@/pages/Say';
 
 const routes = [
   {
@@ -23,6 +25,14 @@ const routes = [
   {
     path: "/home",
     component: Home,
+  },
+  {
+    path: "/say",
+    component: Say,
+  },
+  {
+    path: "/message",
+    component: Message,
   },
   {
     path: "/article/:artid",

@@ -36,6 +36,8 @@
     "juejin-markdown-themes": "^1.24.1",
     "lodash": "^4.17.21",
     "markdown-navbar": "^1.4.3",
+    "mobx": "^6.3.3",
+    "mobx-react": "^7.2.0",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",

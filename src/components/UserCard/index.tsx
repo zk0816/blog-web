@@ -15,14 +15,14 @@ interface Props {
 }
 
 const User = (props: Props) => {
-  const { width= 300, height=400,imgwidth =128,imgheight=128 } = props
+  const { width= 240, height=300,imgwidth =128,imgheight=128 } = props
   return (
     <div
       style={{
         width,
         height,
         padding: 15,
-        backgroundColor: "rgba(12,7,10)",
+        backgroundColor: "#ffffff",
         opacity: 0.7,
         borderRadius: 5,
       }}
@@ -59,20 +59,20 @@ const User = (props: Props) => {
       >
         <div>
           <div style={{ fontSize: 14 }}>文章</div>
-          <div style={{ fontSize: 24, fontWeight: "bold" }}>13</div>
+          <div style={{ fontSize: 16, fontWeight: "bold" }}>13</div>
         </div>
         <div>
           <div style={{ fontSize: 14 }}>分类</div>
-          <div style={{ fontSize: 24, fontWeight: "bold" }}>13</div>
+          <div style={{ fontSize: 16, fontWeight: "bold" }}>13</div>
         </div>
         <div>
           <div style={{ fontSize: 14 }}>标签</div>
-          <div style={{ fontSize: 24, fontWeight: "bold" }}>13</div>
+          <div style={{ fontSize: 16, fontWeight: "bold" }}>13</div>
         </div>
       </div>
       <div
         style={{
-          fontSize: "40px",
+          fontSize: "25px",
           display: "flex",
           justifyContent: "space-around",
         }}
