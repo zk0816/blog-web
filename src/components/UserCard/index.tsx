@@ -27,12 +27,12 @@ const User = (props: Props) => {
         borderRadius: 5,
       }}
     >
-      <div style={{textAlign: 'center'}}>
+      <div style={{ textAlign: "center" }}>
         <Image
           preview={false}
           width={imgwidth}
           height={imgheight}
-          src="../src/assets/img/uesr.jpeg"
+          src="/img/uesr.jpeg"
           style={{ borderRadius: "50%" }}
         />
       </div>
@@ -87,7 +87,7 @@ const User = (props: Props) => {
           trigger="hover"
           content={
             <Image
-              src="../src/assets/img/qq.jpg"
+              src="/img/qq.jpg"
               width={100}
               height={100}
               preview={false}
@@ -100,7 +100,7 @@ const User = (props: Props) => {
           trigger="hover"
           content={
             <Image
-              src="../src/assets/img/weixin.png"
+              src="/img/weixin.png"
               width={100}
               height={100}
               preview={false}

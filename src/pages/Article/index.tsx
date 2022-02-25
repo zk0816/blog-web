@@ -8,7 +8,6 @@ import highlight from "@bytemd/plugin-highlight";
 import breaks from "@bytemd/plugin-breaks";
 import footnotes from "@bytemd/plugin-footnotes";
 import frontmatter from "@bytemd/plugin-frontmatter";
-import gemoji from "@bytemd/plugin-gemoji";
 import math from "@bytemd/plugin-math";
 import mermaid from "@bytemd/plugin-mermaid";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
@@ -36,7 +35,6 @@ const plugins = [
   breaks(),
   footnotes(),
   frontmatter(),
-  gemoji(),
   gfm({ locale: gfm_zhHans }),
   highlight(),
   highlightssr(),

@@ -20,7 +20,6 @@ export function getAddress(params: AddressParams): any {
   return request.get(`/v3/ip`, { params});
 }
 
-
 /** 高德天气api*/
 export function getWeather(params: Params): any {
   return request.get(`/v3/weather/weatherInfo`, { params});

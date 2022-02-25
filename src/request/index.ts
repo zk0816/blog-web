@@ -87,6 +87,8 @@ axios.interceptors.request.use((config: http.Config) => {
     //增加判断 使用高德api
     if (config.url!.includes('v3')) {
       config.url = `/${config.url}`.replace('//', '/');
+    } else if (config.url!.includes('cityjson')) {
+      config.url = `/${config.url}`.replace('//', '/');
     } else {
       config.url = `/${config.prefix}${config.url}`.replace('//', '/');
     }

@@ -17,7 +17,8 @@ const Weather = () => {
     // 获取ip 根据ip获取城市 根据城市获取天气
     getAddress({ key: KEY })
       .then((value:any) => {
-        getCity({ key: KEY, address: value.data.city })
+        //后续 后端获取ip 前端获取的都是服务器ip没啥用
+        getCity({ key: KEY, address: '成都' })
           .then((res: any) => {
             getWeather({
               key: KEY,
@@ -37,7 +38,7 @@ const Weather = () => {
 
   
   return (
-    <div className="background" style={{opacity: 0.7}}>
+    <div className="background" style={{ opacity: 0.7 }}>
       <div className="container">
         <div id="card" className="weather">
           <div className="details">
@@ -57,7 +58,7 @@ const Weather = () => {
           <img
             className="weatherimg"
             alt="image1"
-            src={`/src/assets/img/${
+            src={`/img/${
               desWeather.includes(data.weather) ? data.weather : "50d"
             }.${"svg"}`}
           ></img>
@@ -73,7 +74,7 @@ const Weather = () => {
                 alt="humidity1"
                 className="humidityimg"
                 style={{ width: "5", height: "5" }}
-                src="/src/assets/img/humidity.svg"
+                src="/img/humidity.svg"
               ></img>
               <div className="humidity">空气湿度 {data.humidity}%</div>
             </div>
@@ -82,7 +83,7 @@ const Weather = () => {
                 alt="windspeed1"
                 className="windimg"
                 style={{ width: "5", height: "5" }}
-                src="/src/assets/img/wind.svg"
+                src="/img/wind.svg"
               ></img>
               <div className="windspeed">风力级别 {data.windpower}级</div>
             </div>
