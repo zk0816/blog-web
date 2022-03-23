@@ -88,8 +88,8 @@ const Home: React.FC = () => {
             backgroundColor: "#ffffff",
             height: 45,
             // 吸顶
-            position: 'sticky',
-            top: 0
+            position: "sticky",
+            top: 0,
           }}
         >
           {list.category.map((e: any, index: number) => (
@@ -146,6 +146,11 @@ const Home: React.FC = () => {
           </div>
           <div>
             <User />
+            <div style={{textAlign: 'center'}}>
+              <a className="data" href="https://beian.miit.gov.cn">
+                蜀ICP备2022006165号
+              </a>
+            </div>
           </div>
         </div>
       </div>
