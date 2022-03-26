@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+// @ts-ignore
 import path from 'path'
 // import typescript from "@rollup/plugin-typescript";
 
@@ -14,6 +15,7 @@ export default defineConfig({
   base: './',
   resolve:{
     alias:{
+      // @ts-ignore
       '@': path.resolve(__dirname,'./src')
     },
     extensions: [".tsx", ".ts", ".js"],

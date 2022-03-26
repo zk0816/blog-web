@@ -1,6 +1,6 @@
 import useInitial from '@/hooks/useInitail';
 import React, { useRef } from "react";
-import { Viewer } from "@bytemd/react";
+import { Viewer} from "@bytemd/react";
 import * as API from './api';
 import gfm from "@bytemd/plugin-gfm";
 import highlightssr from "@bytemd/plugin-highlight-ssr";
@@ -47,13 +47,13 @@ const plugins = [
 
 const Article: React.FC = () => {
   const {artid} = useParams<any>();
-  const {data} = useInitial(API.getArticleDetail,{content: ''},{artid: Number(artid)})
+  const {data} = useInitial(API.getArticleDetail,{content: '测试'},{artid: Number(artid)})
   const {data: commentList, setLoading: setCommentLoading} = useInitial(API.findCommentList,[], {artid: Number(artid)})
   const [visible,setVisible] = React.useState(false);
   const [row, setRow] = React.useState<CommentType>({});
   const [form] = Form.useForm();
 
-  console.log(commentList)
+  console.log(data);
 
   const onSave = (values:any) => {
     console.log(values)
@@ -80,7 +80,7 @@ const Article: React.FC = () => {
   return (
     <div className="article-content">
       <div className="article-container">
-        <Viewer value={data.content} plugins={plugins} />
+        <Viewer value={data.content} plugins={plugins}/>
       </div>
       <div className="nav-container">
         {/* <div style={{color: 'black', fontSize: 20,textAlign: 'center'}}>目录</div> */}
