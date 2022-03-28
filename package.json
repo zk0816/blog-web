@@ -26,7 +26,7 @@
     "ahooks": "^3.0.0-alpha.18",
     "antd": "^4.18.1",
     "axios": "^0.24.0",
-    "bytemd": "^1.10.13",
+    "bytemd": "^1.12.4",
     "eslint": "^8.5.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
