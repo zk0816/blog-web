@@ -1,21 +1,17 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv , ConfigEnv,} from 'vite'
 import react from '@vitejs/plugin-react'
-// @ts-ignore
 import path from 'path'
-// import typescript from "@rollup/plugin-typescript";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({mode}: ConfigEnv) => {
+  const env = loadEnv(mode, __dirname)
+  return {
   plugins: [
     react(),
-    // typescript({
-    //         tsconfig: "./tsconfig.json",
-    //     }),
   ],
   base: './',
   resolve:{
     alias:{
-      // @ts-ignore
       '@': path.resolve(__dirname,'./src')
     },
     extensions: [".tsx", ".ts", ".js"],
@@ -35,7 +31,7 @@ export default defineConfig({
     port: 8080,
     proxy:{
       '/api':{
-        target:'http://81.68.218.75:3000',
+        target: env.VITE_RES_URL,
         changeOrigin:true,
         //rewrite: (path) => path.replace(/^\/api/, '')
       },
@@ -47,4 +43,5 @@ export default defineConfig({
       },
     },
   }
+}
 })

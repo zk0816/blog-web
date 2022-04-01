@@ -128,7 +128,7 @@ axios.interceptors.response.use(
     }
 
     console.error(
-      '正常返回的response中未找到data，该场景暂时未做处理，如在实践中遇到，请联系@yangbo补充该处逻辑。',
+      '正常返回的response中未找到data，该场景暂时未做处理。',
     );
     return response;
   },

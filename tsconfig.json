@@ -30,7 +30,7 @@
 // }
 {
   "compilerOptions": {
-    "target": "es5", // 指定 ECMAScript 版本
+    "target": "ESNext", // 指定 ECMAScript 版本
     "lib": [
       "dom",
       "dom.iterable",

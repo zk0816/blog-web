@@ -2,7 +2,8 @@
   "name": "blog-web",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode dev",
+    "pro": "vite --mode prod",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -19,6 +20,7 @@
     "@bytemd/plugin-mermaid": "^1.10.13",
     "@bytemd/react": "^1.10.13",
     "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.23",
     "@types/react-router-config": "^5.0.4",
     "@types/react-router-dom": "^5.3.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
