@@ -1,12 +1,45 @@
+.flexcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .bg {
   height: 17.5rem;
   width: 100%;
   background-color: #00BCFF;
   position: relative;
-  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .title {
     font-size: 2rem;
     color: #ffffff;
     text-align: center;
+  }
+  .subtitle {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.sub {
+  background-color: #ffffff;
+  width: 41.2rem;
+  min-height: 10rem;
+  position: relative;
+  bottom: 2rem;
+  box-shadow: 0.45rem 0.35rem 2rem -0.3rem rgba(0, 0, 0, 0.25);
+  .subcontent {
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }

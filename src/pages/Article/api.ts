@@ -1,4 +1,3 @@
-import { Current } from '@/pages/Home/interface';
 import request from '@/request';
 
 import type { http } from '@/request/http';
@@ -15,9 +14,22 @@ export interface Params {
   cover_url?: string; //文章封面
 }
 
+export interface Detail {
+  artid?: number
+  category?: string
+  comment?: number
+  content: string
+  cover_url?: string
+  like?: number
+  tag?: string
+  thumb_url?:string
+  time?: number
+  title?: string
+  tour?: number
+}
 
 /** 查询文章详情*/
-export function getArticleDetail(params: any): P<Current> {
+export function getArticleDetail(params: any): P<Detail> {
   return request.get(`/article/detail`, { params });
 }
 
@@ -33,12 +45,12 @@ export interface Comment {
 export interface CommentType extends Comment{}
 
 /** 评论*/
-export function addComment(params: Comment): P<Current> {
+export function addComment(params: Comment): P<void> {
   return request.post(`/comment/create`, { ...params });
 }
 
 /** 回复*/
-export function addReply(params: Reply): P<Current> {
+export function addReply(params: Reply): P<void> {
   return request.post(`/reply/create`, { ...params });
 }
 

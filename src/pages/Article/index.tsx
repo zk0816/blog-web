@@ -29,6 +29,9 @@ import { CommentList, CommentType, Reply } from './api';
 import { MessageOutlined, UserOutlined } from "@ant-design/icons";
 import ReplyModal from '@/pages/Article/components/ReplyModal';
 import _ from 'lodash'
+import Content from '@/components/Content';
+import IconFont from '@/icon';
+import moment from 'moment';
 
 
 const plugins = [
@@ -47,16 +50,13 @@ const plugins = [
 
 const Article: React.FC = () => {
   const {artid} = useParams<any>();
-  const {data} = useInitial(API.getArticleDetail,{content: '测试'},{artid: Number(artid)})
+  const {data} = useInitial(API.getArticleDetail,{content: ''},{artid: Number(artid)})
   const {data: commentList, setLoading: setCommentLoading} = useInitial(API.findCommentList,[], {artid: Number(artid)})
   const [visible,setVisible] = React.useState(false);
   const [row, setRow] = React.useState<CommentType>({});
   const [form] = Form.useForm();
 
-  console.log(data);
-
   const onSave = (values:any) => {
-    console.log(values)
     const params: API.Comment = {
       artid,
       commentAvatar: values.avatar,
@@ -78,104 +78,138 @@ const Article: React.FC = () => {
     }).catch(err => message.error(err.message));
   }
   return (
-    <div className="article-content">
-      <div className="article-container">
-        <Viewer value={data.content} plugins={plugins}/>
-      </div>
-      <div className="nav-container">
-        {/* <div style={{color: 'black', fontSize: 20,textAlign: 'center'}}>目录</div> */}
-        <MarkdownNavbar source={data.content} />
-      </div>
-      <Form
-        form={form}
-        onFinish={_.debounce(onSave, 1000)}
-        style={{ backgroundColor: "#FFF", marginTop: 30 }}
-      >
-        <Form.Item>
-          <CommentCard title="评论" form={form} />
-        </Form.Item>
-        <Form.Item>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              backgroundColor: "#fff",
-              padding: "0px 20px 10px 20px",
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              发送
-            </Button>
+    <div>
+      <Content height="8rem">
+        <div className="article-content">
+          <div className="info">
+            <div className="tag">
+              {data.tag &&
+                data.tag.split(",").map((e, index) => (
+                  <div key={`index_${index}`} className="tagtitle">
+                    {e}
+                  </div>
+                ))}
+            </div>
+            <div>
+              <div className="left">
+                <IconFont type="icon-icon_category" className="icon" />
+                {data.category}
+              </div>
+            </div>
           </div>
-        </Form.Item>
-      </Form>
-      <div className="comment">
-        {commentList.map((e: CommentList) => (
-          <Comment
-            style={{ maxWidth: 720 }}
-            key={e.commentId}
-            actions={[
-              <span key="comment-nested-reply-to">
-                <MessageOutlined
-                  onClick={() => {
-                    setVisible(true);
-                    setRow(e);
-                  }}
-                />
-              </span>,
-            ]}
-            author={
-              <span
-                style={{ color: "black", fontSize: 14, fontWeight: "bold" }}
-              >
-                {e.commentName}
-              </span>
-            }
-            avatar={
-              <Avatar
-                src={e.commentAvatar}
-                icon={<UserOutlined />}
-                size={50}
-                style={{ borderRadius: 5 }}
-              />
-            }
-            content={<div style={{ color: "black" }}>{e.commentContent}</div>}
+          <div className="infotime">
+            <div className="left">
+              <IconFont type="icon-calendar-full" className="icon" />
+              最新更新:{moment(data.time).format("YYYY-MM-DD")}
+            </div>
+          </div>
+          <div className="article-container">
+            <Viewer value={data.content} plugins={plugins} />
+          </div>
+          <div className="nav-container">
+            {/* <div className="list">目录</div> */}
+            <MarkdownNavbar source={data.content} />
+          </div>
+          <Form
+            form={form}
+            onFinish={_.debounce(onSave, 1000)}
+            style={{ backgroundColor: "#FFF", marginTop: "2rem" }}
           >
-            {e.replys.map((v: Reply) => (
-              <Comment
-                key={v.replyId}
+            <Form.Item>
+              <CommentCard title="评论" form={form} />
+            </Form.Item>
+            <Form.Item>
+              <div
                 style={{
-                  background: "rgba(247,248,250,.7)",
-                  paddingInline: 20,
-                  maxWidth: 720,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  backgroundColor: "#fff",
+                  padding: "0px 20px 10px 20px",
                 }}
+              >
+                <Button type="primary" htmlType="submit">
+                  发送
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
+          <div className="comment">
+            {commentList.map((e: CommentList) => (
+              <Comment
+                style={{ maxWidth: 720 }}
+                key={e.commentId}
+                actions={[
+                  <span key="comment-nested-reply-to">
+                    <MessageOutlined
+                      onClick={() => {
+                        setVisible(true);
+                        setRow(e);
+                      }}
+                    />
+                  </span>,
+                ]}
                 author={
                   <span
                     style={{ color: "black", fontSize: 14, fontWeight: "bold" }}
                   >
-                    {v.replyName}
+                    {e.commentName}
                   </span>
                 }
                 avatar={
                   <Avatar
-                    src={v.replyAvatar}
+                    src={e.commentAvatar}
                     icon={<UserOutlined />}
                     size={50}
                     style={{ borderRadius: 5 }}
                   />
                 }
-                content={<div style={{ color: "black" }}>{v.replyContent}</div>}
-              />
+                content={
+                  <div style={{ color: "black" }}>{e.commentContent}</div>
+                }
+              >
+                {e.replys.map((v: Reply) => (
+                  <Comment
+                    key={v.replyId}
+                    style={{
+                      background: "rgba(247,248,250,.7)",
+                      paddingInline: 20,
+                      maxWidth: 720,
+                    }}
+                    author={
+                      <span
+                        style={{
+                          color: "black",
+                          fontSize: 14,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {v.replyName}
+                      </span>
+                    }
+                    avatar={
+                      <Avatar
+                        src={v.replyAvatar}
+                        icon={<UserOutlined />}
+                        size={50}
+                        style={{ borderRadius: 5 }}
+                      />
+                    }
+                    content={
+                      <div style={{ color: "black" }}>{v.replyContent}</div>
+                    }
+                  />
+                ))}
+              </Comment>
             ))}
-          </Comment>
-        ))}
-        <ReplyModal
-          visible={visible}
-          setVisible={setVisible}
-          setLoading={setCommentLoading}
-          row={row}
-        />
-      </div>
+            <ReplyModal
+              visible={visible}
+              setVisible={setVisible}
+              setLoading={setCommentLoading}
+              row={row}
+            />
+          </div>
+        </div>
+      </Content>
     </div>
   );
 };

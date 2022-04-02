@@ -12,9 +12,9 @@ import {Redirect} from 'react-router-dom';
 import React from 'react';
 import Article from '@/pages/Article';
 import Home from '@/pages/Home';
-import Friend from '@/pages/Firend';
-import Message from '@/pages/Message';
-import Say from '@/pages/Say';
+import Tag from '@/pages/Tag';
+import Category from '@/pages/Category';
+import Book from '@/pages/Book';
 
 const routes = [
   {
@@ -27,20 +27,20 @@ const routes = [
     component: Home,
   },
   {
-    path: "/say",
-    component: Say,
+    path: "/tag",
+    component: Tag,
   },
   {
-    path: "/message",
-    component: Message,
+    path: "/category",
+    component: Category,
   },
   {
     path: "/article/:artid",
     component: Article,
   },
   {
-    path: "/friend",
-    component: Friend,
+    path: "/book",
+    component: Book,
   },
 ];
 

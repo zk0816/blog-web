@@ -25,7 +25,6 @@ export function createStore<V, State = void>(
     if (value === null) {
       throw new Error('Component must be wrapped with <Provider>');
     }
-    console.log('vvvv', value);
     return value;
   }
 

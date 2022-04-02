@@ -21,4 +21,5 @@ export interface Categorty {
 export interface Tag {
   tagId: number;
   tagName?: string;
+  tagColor: string
 }
