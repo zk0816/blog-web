@@ -1,6 +1,25 @@
-.category{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
+  .taglist {
+    display: flex;
+    padding: 0 5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    .tag {
+      height: 1.4rem;
+      line-height: 1.4rem;
+      font-size: 0.8rem;;
+      border-radius: 0.5rem;
+      padding: 0 1rem;
+      color: #333333;
+      text-align: center;
+      margin-right: 1rem; 
+      margin-bottom: 0.5rem;
+      background-color: #e5e5e5;
+      box-shadow: 0.45rem 0.35rem 2rem -0.3rem rgba(0, 0, 0, 0.25);
+    }
+    :hover {
+      background-color: #00BCFF;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }

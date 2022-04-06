@@ -16,7 +16,7 @@ const Tag: React.FC = () => {
       >
         <div className="taglist">
           {data.map((v, index) => (
-              <div key={`index_${index}`} className='tag' style={{backgroundColor: v.tagColor}}>{v.tagName}</div>
+              <div key={`index_${index}`} className='tag'>{v.tagName}</div>
             ))}
         </div>
       </Content>
