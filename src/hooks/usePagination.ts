@@ -170,16 +170,16 @@ function usePagination<T>(
     return _pa;
   }
 
-  const paginationConfig: TablePaginationConfig | false = {
+  const paginationConfig = {
     ...state.pagination,
     showSizeChanger: true,
     showQuickJumper: true,
     // 页码改变的回调，参数是改变后的页码及每页条数
-    onChange: (current, pageSize) => {
+    onChange: (current: number, pageSize: number) => {
       setParams({ current, pageSize }, true);
     },
     // pageSize 变化的回调
-    onShowSizeChange: (current, pageSize) => {
+    onShowSizeChange: (current: number, pageSize: number) => {
       setParams({ current, pageSize }, true);
     },
   };

@@ -4,6 +4,7 @@ import {Current} from '@/common/interface';
 import moment from 'moment';
 import IconFont from '@/icon';
 import { EyeOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
+import {Color} from '@/style/global';
 
 interface Props {
   data: Current
@@ -25,7 +26,7 @@ const ArticleCard = ({ data, onClick }: Props) => {
         className="card"
         style={{
           backgroundImage: `url(${data.cover_url})`,
-          backgroundColor: data.cover_url ? "none" : "#00BCFF",
+          backgroundColor: data.cover_url ? "none" : Color.primaryColor,
         }}
       >
         <div className="text">{data.title}</div>
@@ -62,7 +63,9 @@ const ArticleCard = ({ data, onClick }: Props) => {
             <span>
               <LikeOutlined />
             </span>
-            <span className="number">{data.like === 0 ? "点赞" : data.like}</span>
+            <span className="number">
+              {data.like === 0 ? "点赞" : data.like}
+            </span>
           </div>
           <div className="icon">
             <span>
