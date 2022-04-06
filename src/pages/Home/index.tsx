@@ -11,7 +11,7 @@ import { Color } from '@/style/global';
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const {list: articlelist, paginationConfig,setParams} = usePagination(API.getArticle,{pageSize: 9, current: 1}); //查文章
+  const {list: articlelist, paginationConfig,setParams} = usePagination(API.getArticle,{pageSize: 2, current: 1}); //查文章
 
   function itemRender(current: number, type: string, originalElement: React.ReactNode) {
     if (type === "prev") {
