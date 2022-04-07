@@ -78,7 +78,7 @@ const Article: React.FC = () => {
     }).catch(err => message.error(err.message));
   }
   return (
-    <div>
+    <div className='content'>
       <Content height="8rem">
         <div className="article-content">
           <div className="info">

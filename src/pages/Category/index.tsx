@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Content from '@/components/Content';
 import './index.less'
 import useInitial from '@/hooks/useInitail';
 import * as API from "@/common/api";
+import { NavLink, useLocation } from 'react-router-dom';
+import { Color } from '@/style/global';
+import ArticleList from '@/components/ArticleList';
 
 const Category: React.FC = () => {
-  const { data } = useInitial(API.getCategory, [], ""); //查标签
+  const { data } = useInitial(API.getCategory, [], ""); //查分类
+  const { search } = useLocation();
+  const [params, setParams] = useState({});
+
+  React.useEffect(() => {
+    if (search) {
+      const categoryId = search.substring(1);
+      setParams({ categoryId });
+    }
+  }, [search]);
   return (
     <div className="content">
       <Content
@@ -16,12 +28,21 @@ const Category: React.FC = () => {
       >
         <div className="taglist">
           {data.map((v, index) => (
-            <div key={`index_${index}`} className="tag">
+            <NavLink
+              to={`/category/${v.categoryName}?${v.categoryId}`}
+              key={`index_${index}`}
+              className="tag"
+              activeStyle={{
+                color: "#fff",
+                backgroundColor: Color.primaryColor,
+              }}
+            >
               {v.categoryName}
-            </div>
+            </NavLink>
           ))}
         </div>
       </Content>
+      {search && <ArticleList param={params} delay />}
     </div>
   );
 };;

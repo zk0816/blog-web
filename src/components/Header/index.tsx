@@ -49,15 +49,13 @@ const Header = () => {
             to={value.path}
             activeStyle={{ color: "#eee" }}
             style={(isActive) => ({ color: isActive ? "#eee" : "#fff" })}
-            // className="titleLink"
-            // onClick={() => console.log("first")}
           >
             <Popover
               className="titleLink"
               content={
                 value.path == "/category" && (
                   <PopoverList
-                    data={categorylist.map((e) => e.categoryName || "")}
+                    data={categorylist}
                   />
                 )
               }
