@@ -62,48 +62,52 @@ const ArticleList = (props: Props) => {
         >
           <RightOutlined />
         </div>
-      );
+      ); 
     }
     return originalElement;
   }
   return (
-    <div className="flexcolumn" style={{minHeight: '25rem'}}>
-      <div className="flexgrid">
-        {list.map((e, index) => (
-          <div
-            key={e.artid}
-            style={{
-              margin:
-                (index - 1) % 3 === 0 || index + 1 === 2
-                  ? "0 2.6rem 1rem 2.6rem"
-                  : "0 0 1rem 0",
-            }}
-          >
-            <ArticleCard
-              data={e}
-              onClick={() =>
-                history.push({
-                  pathname: `/article/${e.artid}`,
-                })
-              }
-            />
+    <div>
+      {list.length > 0 && (
+        <div className="flexcolumn" style={{ minHeight: "25rem" }}>
+          <div className="flexgrid">
+            {list.map((e, index) => (
+              <div
+                key={e.artid}
+                style={{
+                  margin:
+                    (index - 1) % 3 === 0 || index + 1 === 2
+                      ? "0 2.6rem 1rem 2.6rem"
+                      : "0 0 1rem 0",
+                }}
+              >
+                <ArticleCard
+                  data={e}
+                  onClick={() =>
+                    history.push({
+                      pathname: `/article/${e.artid}`,
+                    })
+                  }
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <Pagination
-        simple
-        // defaultCurrent={paginationConfig.current}
-        current={paginationConfig.current}
-        total={paginationConfig.total}
-        itemRender={itemRender}
-        className="pagetion"
-        onChange={(e) => setParams({ pageSize: 9, current: e }, true)}
-      />
-      <BackTop>
-        <div className="up">
-          <CaretUpOutlined />
+          <Pagination
+            simple
+            // defaultCurrent={paginationConfig.current}
+            current={paginationConfig.current}
+            total={paginationConfig.total}
+            itemRender={itemRender}
+            className="pagetion"
+            onChange={(e) => setParams({ pageSize: 9, current: e }, true)}
+          />
+          <BackTop>
+            <div className="up">
+              <CaretUpOutlined />
+            </div>
+          </BackTop>
         </div>
-      </BackTop>
+      )}
     </div>
   );
 }
