@@ -1,5 +1,5 @@
 import useInitial from '@/hooks/useInitail';
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Viewer} from "@bytemd/react";
 import * as API from './api';
 import gfm from "@bytemd/plugin-gfm";
@@ -50,11 +50,16 @@ const plugins = [
 
 const Article: React.FC = () => {
   const {artid} = useParams<any>();
-  const {data} = useInitial(API.getArticleDetail,{content: ''},{artid: Number(artid)})
+  const {data,setParams} = useInitial(API.getArticleDetail,{content: ''},{artid: Number(artid)})
   const {data: commentList, setLoading: setCommentLoading} = useInitial(API.findCommentList,[], {artid: Number(artid)})
   const [visible,setVisible] = React.useState(false);
   const [row, setRow] = React.useState<CommentType>({});
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    console.log(artid)
+    setParams({artid}, true)
+  }, [artid])
 
   const onSave = (values:any) => {
     const params: API.Comment = {

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useContext, createContext } from "react";
 import './index.less'
 import { NavLink } from "react-router-dom";
 import IconFont from '@/icon';
-import { Input, Popover } from "antd";
+import {Popover } from "antd";
 import useInitial from '@/hooks/useInitail';
 import * as API from "@/common/api";
 import PopoverList from '@/components/PopoverList';
+import { useScroll } from 'ahooks';
+import HeadModal from '@/components/Header/components/HeadModal';
 
 const data = [
   {
@@ -30,18 +32,36 @@ const data = [
   },
 ];
 
+export const MyContext = createContext<any>(null);
+
 const Header = () => {
-  const {data: categorylist} = useInitial(API.getCategory,[],'') //查分类
+  const { data: categorylist } = useInitial(API.getCategory, [], ""); //查分类
+  const [visible,setVisible] = useState(false);
+  const scroll = useScroll(document);
 
   return (
-    <div className="head">
+    <div
+      className="head"
+      style={{
+        boxShadow:
+          scroll && scroll.top > 25
+            ? "0rem 0.2rem 0.2rem 0rem rgba(17,156,215,0.85)"
+            : "none",
+      }}
+    >
       <div className="tent">
-        <IconFont
-          type="icon-sousuo1"
-          className="icon"
+        {/**搜索 */}
+        <div
+          className="titleLink"
           style={{ color: "#fff" }}
-        />
-        <Input className="input" />
+          onClick={() => setVisible(true)}
+        >
+          <IconFont type="icon-sousuo1" className="icon" />
+          <div className="title">搜索</div>
+        </div>
+        <MyContext.Provider value={{visible,setVisible}}>
+          <HeadModal />
+        </MyContext.Provider>
         {/** 路由 */}
         {data.map((value, index: number) => (
           <NavLink
@@ -53,11 +73,7 @@ const Header = () => {
             <Popover
               className="titleLink"
               content={
-                value.path == "/category" && (
-                  <PopoverList
-                    data={categorylist}
-                  />
-                )
+                value.path == "/category" && <PopoverList data={categorylist} />
               }
             >
               <IconFont type={value.icon} className="icon" />
@@ -74,6 +90,6 @@ const Header = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;
